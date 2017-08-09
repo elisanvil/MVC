@@ -14,8 +14,8 @@ app.use(methodOverride());
 
 //Import Models and Controllers
 
-var models = require('./models')(app,mongoose);
-var RecibosCtrl = require('./controllers');
+var models = require('./models/tickets')(app,mongoose);
+var TicketCtrl = require('./controllers/tickets');
 
 
 //Example Route
@@ -33,7 +33,7 @@ app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//Routes Facturas
+//Routes Tickets
 
 tickets.get('/',TicketCtrl.findAllTickets);
 
@@ -58,8 +58,6 @@ tickets.route('/tickets/:id')
   .delete(TicketCtrl.deleteTicket);
 
 app.use('/api', tickets);
-
-
 app.use(tickets);
 
 
@@ -67,10 +65,6 @@ mongoose.connect('mongodb://localhost/tickets', function(error, respuesta) {
 	if (error) {
 		console.log('ERROR: connecting to Database ' +  error);
 	}
-  /*
-	app.listen(8080, function() {
-		console.log("Node server running on http://localhost:5602");
-	});*/
 });
 
 app.listen(8080, function() {  

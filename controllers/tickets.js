@@ -1,6 +1,6 @@
 //File: controllers/tickets.js
 var mongoose = require('mongoose');  
-var Factura  = mongoose.model('Ticket');
+var Ticket  = mongoose.model('Ticket');
 
 //GET - Return all facturas in the DB
 exports.findAllTickets = function(req, res) {  
