@@ -1,0 +1,36 @@
+block content
+  h1 Facturas
+  -if(factura)
+    table(border='1')
+      thead
+        tr
+          th Numero
+          th Empresa
+          th Servicio
+          th Tiempo
+          th Deuda
+          th Estado
+          th &nbsp;
+          th &nbsp;
+          th &nbsp;
+      tbody
+        -each item in factura
+          tr
+            td #{item.num}
+            td #{item.company}
+            td #{item.service}
+            td #{item.time}
+            td #{item.debt}
+            td #{item.state}
+            td Ver
+            td 
+              a(href="/edit-factura/#{item._id}") Editar
+            td 
+              a(href="/facturas/#{item._id}") Eliminar
+
+    p
+      a(href="/nueva-factura") Nueva Factura
+  -else
+    p No existen facturas creadas
+   
+  
