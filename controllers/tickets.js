@@ -51,7 +51,7 @@ exports.showEditTicket = function(req, res) {
     Ticket.findById(req.params.id, function(err, ticket) {
         
         if(err) return res.status(500).send(err.message);
-        else return res.render('../views/tickets/show', {title: 'Editar Ticket', act: '/ticket/'+req.params.id, ticket:ticket});
+        else return res.render('../views/show', {title: 'Editar Ticket', act: '/ticket/'+req.params.id, ticket:ticket});
         res.status(200).jsonp(ticket);
         
     });
@@ -70,7 +70,7 @@ exports.updateTicket = function(req, res, next) {
 
         ticket.save(function(err) {
             if(err) return res.status(500).send(err.message);
-            else res.render('../views/tickets/index', {title: 'Lista de Tickets', ticket: ticket});
+            else res.render('../views/index', {title: 'Lista de Tickets', ticket: ticket});
             res.status(200).jsonp(ticket);
 
         });
@@ -81,7 +81,7 @@ exports.updateTicket = function(req, res, next) {
 exports.deleteTicket = function(req, res) {  
     Ticket.findById(req.params.id, function(err, ticket) {
         ticket.remove(function(err) {
-            if(err) res.render('../views/tickets/index', {title: 'Lista de Tickets', ticket: ticket});
+            if(err) res.render('../views/index', {title: 'Lista de Tickets', ticket: ticket});
             else res.redirect('/')
                 //res.status(200).send();
             
@@ -91,5 +91,5 @@ exports.deleteTicket = function(req, res) {
 
 exports.create = function (req, res, next) {
     
-  return res.render('../views/tickets/show', {title: 'Nuevo Ticket', act: '/tickets', ticket: {}})
+  return res.render('../views/show', {title: 'Nuevo Ticket', act: '/tickets', ticket: {}})
 }
