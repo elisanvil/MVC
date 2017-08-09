@@ -13,14 +13,12 @@ app.use(methodOverride());
 
 
 //Import Models and Controllers
-//var models = require('./models/facturas')(app,mongoose);
-//var FacturaCtrl = require('./controllers/facturas');
 
-var models = require('./models/recibos')(app,mongoose);
-var RecibosCtrl = require('./controllers/recibos');
+var models = require('./models')(app,mongoose);
+var RecibosCtrl = require('./controllers');
 
 
-//Exmaple Route
+//Example Route
 var router = express.Router();
 router.get('/', function(req, res) {  
    res.send("Hello World!");
@@ -28,95 +26,44 @@ router.get('/', function(req, res) {
 
 
 // API routes
-var facturas = express.Router();
-
-var recibos = express.Router();
-/*
-facturas.get('/',(req,res) => {
-  res.sendFile(__dirname + '/index.html')
-  
-});*/
-//facturas.route('/')  
-/*
-facturas.get('/', (req,res) => {
-    res.sendFile(__dirname+'/index.html')
-  });
-
-facturas.route('/agregar')
-  .get( (req,res) => {
-    res.sendFile(__dirname + '/agregar.html') 
-  });
-*/
-
-
+var tickets = express.Router();
 
 app.set('views',path.join(__dirname,'views'));
 app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//Routes Recibos
-
-recibos.get('/',ReciboCtrl.findAllRecibos);
-
-recibos.get('/nueva-recibo', ReciboCtrl.create);
-
-recibos.get('/edit-recibo/:id',ReciboCtrl.showEditRecibo);
-
-recibos.route('/')  
-  .get(ReciboCtrl.findAllRE);
-
-recibos.route('/recibo/:id')  
-  .get(ReciboCtrl.findAllRecibos)
-  .post(ReciboCtrl.updateRecibo);
-
-recibos.route('/recibos')  
-  .get(ReciboCtrl.findAllRecibos)
-  .post(ReciboCtrl.addRecibo);
-
-recibos.route('/recibos/:id')  
-  .get(ReciboCtrl.findById)
-  .put(ReciboCtrl.updateRecibo)
-  .delete(ReciboCtrl.deleteRecibo);
-
-app.use('/api', recibos);
-
-
-app.use(recibos);
-
-
-
 //Routes Facturas
-/*
-facturas.get('/',FacturaCtrl.findAllFacturas);
 
-facturas.get('/nueva-factura', FacturaCtrl.create);
+tickets.get('/',TicketCtrl.findAllTickets);
 
-facturas.get('/edit-factura/:id',FacturaCtrl.showEditFactura);
+tickets.get('/nuevo-ticket', TicketCtrl.create);
 
-facturas.route('/')  
-  .get(FacturaCtrl.findAllFacturas);
+tickets.get('/edit-ticket/:id',TicketCtrl.showEditTicket);
 
-facturas.route('/factura/:id')  
-  .get(FacturaCtrl.findAllFacturas)
-  .post(FacturaCtrl.updateFactura);
+tickets.route('/')  
+  .get(TicketCtrl.findAllTickets);
 
-facturas.route('/facturas')  
-  .get(FacturaCtrl.findAllFacturas)
-  .post(FacturaCtrl.addFactura);
+tickets.route('/ticket/:id')  
+  .get(TicketCtrl.findAllTickets)
+  .post(TicketCtrl.updateTicket);
 
-facturas.route('/facturas/:id')  
-  .get(FacturaCtrl.findById)
-  .put(FacturaCtrl.updateFactura)
-  .delete(FacturaCtrl.deleteFactura);
+tickets.route('/tickets')  
+  .get(TicketCtrl.findAllTickets)
+  .post(TicketCtrl.addTicket);
 
-app.use('/api', facturas);
+tickets.route('/tickets/:id')  
+  .get(TicketCtrl.findById)
+  .put(TicketCtrl.updateTicket)
+  .delete(TicketCtrl.deleteTicket);
+
+app.use('/api', tickets);
 
 
-app.use(facturas);
-*/
+app.use(tickets);
 
-mongoose.connect('mongodb://localhost/facturas', function(error, respuesta) {
+
+mongoose.connect('mongodb://localhost/tickets', function(error, respuesta) {
 	if (error) {
 		console.log('ERROR: connecting to Database ' +  error);
 	}
