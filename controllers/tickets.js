@@ -7,7 +7,7 @@ exports.findAllTickets = function(req, res) {
     Ticket.find(function(err, ticket) {
         if(err) res.send(500, err.message);
         else {
-            return res.render('../views/tickets/index', {title: 'Lista de Tickets', ticket: ticket});
+            return res.render('../views/index', {title: 'Lista de Tickets', ticket: ticket});
         }
         console.log('GET /tickets');
             res.status(200).jsonp(ticket);
