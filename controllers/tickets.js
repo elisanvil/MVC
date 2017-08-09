@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');  
 var Ticket  = mongoose.model('Ticket');
 
-//GET - Return all facturas in the DB
+//GET - Return all tickets in the DB
 exports.findAllTickets = function(req, res) {  
     Ticket.find(function(err, ticket) {
         if(err) res.send(500, err.message);
@@ -29,7 +29,7 @@ exports.addTicket = function(req, res, next) {
     console.log('POST');
     console.log(req.body);
 
-    var factura = new Ticket({
+    var ticket = new Ticket({
         fecha:     	req.body.fecha,
         origen:  	req.body.origen,
         destino:  	req.body.destino,
